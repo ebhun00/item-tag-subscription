@@ -1,12 +1,12 @@
-package com.safeway.titan.dug;
+package com.safeway.titan.dug.comfiguration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.safeway.titan.repository.HotelByLetterRepository;
-import com.safeway.titan.repository.HotelRepository;
-import com.safeway.titan.service.HotelService;
-import com.safeway.titan.service.HotelServiceImpl;
+import com.safeway.titan.dug.repository.HotelByLetterRepository;
+import com.safeway.titan.dug.repository.HotelRepository;
+import com.safeway.titan.dug.service.HotelService;
+import com.safeway.titan.dug.service.HotelServiceImpl;
 
 @Configuration
 public class RootConfiguration {

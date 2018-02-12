@@ -1,9 +1,9 @@
-package com.safeway.titan.repository;
+package com.safeway.titan.dug.repository;
 
 import java.util.List;
 import java.util.UUID;
 
-import com.safeway.titan.domain.Hotel;
+import com.safeway.titan.dug.domain.Hotel;
 
 public interface HotelRepository  {
     Hotel save(Hotel hotel);

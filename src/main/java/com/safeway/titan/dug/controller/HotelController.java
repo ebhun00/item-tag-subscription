@@ -1,13 +1,13 @@
-package com.safeway.titan.controller;
+package com.safeway.titan.dug.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.safeway.titan.domain.Hotel;
-import com.safeway.titan.domain.HotelByLetter;
-import com.safeway.titan.service.HotelService;
+import com.safeway.titan.dug.domain.Hotel;
+import com.safeway.titan.dug.domain.HotelByLetter;
+import com.safeway.titan.dug.service.HotelService;
 
 import java.util.List;
 import java.util.UUID;

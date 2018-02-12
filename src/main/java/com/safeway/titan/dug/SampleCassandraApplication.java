@@ -1,4 +1,4 @@
-package com.safeway.titan.dug.db.config;
+package com.safeway.titan.dug;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

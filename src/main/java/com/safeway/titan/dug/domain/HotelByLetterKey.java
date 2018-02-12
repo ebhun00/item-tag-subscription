@@ -1,4 +1,4 @@
-package com.safeway.titan.domain;
+package com.safeway.titan.dug.domain;
 
 import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;

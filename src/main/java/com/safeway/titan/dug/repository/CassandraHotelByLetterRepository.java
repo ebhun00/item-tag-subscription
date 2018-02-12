@@ -1,9 +1,9 @@
-package com.safeway.titan.repository;
+package com.safeway.titan.dug.repository;
 
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
-import com.safeway.titan.domain.HotelByLetter;
-import com.safeway.titan.domain.HotelByLetterKey;
+import com.safeway.titan.dug.domain.HotelByLetter;
+import com.safeway.titan.dug.domain.HotelByLetterKey;
 
 import org.springframework.cassandra.core.CqlTemplate;
 import org.springframework.data.cassandra.core.CassandraTemplate;

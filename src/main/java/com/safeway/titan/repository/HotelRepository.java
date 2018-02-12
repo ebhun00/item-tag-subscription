@@ -1,9 +1,9 @@
-package cass.repository;
-
-import cass.domain.Hotel;
+package com.safeway.titan.repository;
 
 import java.util.List;
 import java.util.UUID;
+
+import com.safeway.titan.domain.Hotel;
 
 public interface HotelRepository  {
     Hotel save(Hotel hotel);

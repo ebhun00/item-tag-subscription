@@ -1,11 +1,12 @@
-package cass.config;
+package com.safeway.titan.dug;
 
-import cass.repository.HotelByLetterRepository;
-import cass.repository.HotelRepository;
-import cass.service.HotelService;
-import cass.service.HotelServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.safeway.titan.repository.HotelByLetterRepository;
+import com.safeway.titan.repository.HotelRepository;
+import com.safeway.titan.service.HotelService;
+import com.safeway.titan.service.HotelServiceImpl;
 
 @Configuration
 public class RootConfiguration {

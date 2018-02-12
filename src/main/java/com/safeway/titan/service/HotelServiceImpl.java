@@ -1,12 +1,12 @@
-package cass.service;
-
-import cass.domain.Hotel;
-import cass.domain.HotelByLetter;
-import cass.repository.HotelByLetterRepository;
-import cass.repository.HotelRepository;
+package com.safeway.titan.service;
 
 import java.util.List;
 import java.util.UUID;
+
+import com.safeway.titan.domain.Hotel;
+import com.safeway.titan.domain.HotelByLetter;
+import com.safeway.titan.repository.HotelByLetterRepository;
+import com.safeway.titan.repository.HotelRepository;
 
 public class HotelServiceImpl implements HotelService {
 

@@ -1,11 +1,11 @@
-package cass.service;
+package com.safeway.titan.service;
 
-
-import cass.domain.Hotel;
-import cass.domain.HotelByLetter;
 
 import java.util.List;
 import java.util.UUID;
+
+import com.safeway.titan.domain.Hotel;
+import com.safeway.titan.domain.HotelByLetter;
 
 public interface HotelService {
     Hotel save(Hotel hotel);

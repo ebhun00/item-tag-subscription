@@ -1,9 +1,10 @@
-package cass.repository;
+package com.safeway.titan.repository;
 
-import cass.domain.HotelByLetter;
-import cass.domain.HotelByLetterKey;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
+import com.safeway.titan.domain.HotelByLetter;
+import com.safeway.titan.domain.HotelByLetterKey;
+
 import org.springframework.cassandra.core.CqlTemplate;
 import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Repository;

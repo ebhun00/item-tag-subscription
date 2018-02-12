@@ -1,8 +1,9 @@
-package cass.repository;
+package com.safeway.titan.repository;
 
-import cass.domain.Hotel;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
+import com.safeway.titan.domain.Hotel;
+
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Repository;
 

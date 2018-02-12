@@ -1,12 +1,13 @@
-package cass.web;
+package com.safeway.titan.controller;
 
-import cass.domain.Hotel;
-import cass.domain.HotelByLetter;
-import cass.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.safeway.titan.domain.Hotel;
+import com.safeway.titan.domain.HotelByLetter;
+import com.safeway.titan.service.HotelService;
 
 import java.util.List;
 import java.util.UUID;

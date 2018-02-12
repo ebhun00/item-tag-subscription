@@ -4,12 +4,12 @@ import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
 @Table("hotels_by_letter")
-public class HotelByLetter {
+public class TransformerByLetter {
 
-    public HotelByLetter() {}
+    public TransformerByLetter() {}
 
-    public HotelByLetter(Hotel hotel) {
-        HotelByLetterKey hotelByLetterKey = new HotelByLetterKey();
+    public TransformerByLetter(Transformer hotel) {
+        TransformerByLetterKey hotelByLetterKey = new TransformerByLetterKey();
         hotelByLetterKey.setFirstLetter(hotel.getName().substring(0, 1));
         hotelByLetterKey.setName(hotel.getName());
         hotelByLetterKey.setHotelId(hotel.getId());
@@ -20,7 +20,7 @@ public class HotelByLetter {
     }
 
     @PrimaryKey
-    private HotelByLetterKey hotelByLetterKey;
+    private TransformerByLetterKey hotelByLetterKey;
 
     private String address;
 
@@ -28,11 +28,11 @@ public class HotelByLetter {
 
     private String zip;
 
-    public HotelByLetterKey getHotelByLetterKey() {
+    public TransformerByLetterKey getHotelByLetterKey() {
         return hotelByLetterKey;
     }
 
-    public void setHotelByLetterKey(HotelByLetterKey hotelByLetterKey) {
+    public void setHotelByLetterKey(TransformerByLetterKey hotelByLetterKey) {
         this.hotelByLetterKey = hotelByLetterKey;
     }
 

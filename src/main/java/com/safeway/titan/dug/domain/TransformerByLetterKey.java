@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @PrimaryKeyClass
-public class HotelByLetterKey implements Serializable {
+public class TransformerByLetterKey implements Serializable {
 
     @PrimaryKeyColumn(name="first_letter", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private String firstLetter;

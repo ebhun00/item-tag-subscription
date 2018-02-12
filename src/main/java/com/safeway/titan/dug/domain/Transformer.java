@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Table("hotels")
-public class Hotel implements Serializable {
+public class Transformer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,10 +22,10 @@ public class Hotel implements Serializable {
 
     private String zip;
 
-    public Hotel() {
+    public Transformer() {
     }
 
-    public Hotel(String name) {
+    public Transformer(String name) {
         this.name = name;
     }
 

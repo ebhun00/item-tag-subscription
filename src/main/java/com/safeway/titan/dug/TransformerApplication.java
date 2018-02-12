@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration;
 
 @SpringBootApplication
-public class SampleCassandraApplication {
+public class TransformerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleCassandraApplication.class, args);
+		SpringApplication.run(TransformerApplication.class, args);
 	}
 
 }

@@ -6,7 +6,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 jar {
-	baseName = 'sample-boot-with-cassandra'
+	baseName = 'sample-boot-dug'
 	version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -18,7 +18,11 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-cassandra')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile 'com.github.ozlerhakan:poiji:1.8'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: '1.5.1.RELEASE'
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+	compile group: 'com.opencsv', name: 'opencsv', version: '3.9'
+	compile group: 'com.google.guava', name: 'guava', version: '23.0'
 }

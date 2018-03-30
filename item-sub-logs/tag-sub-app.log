@@ -1,0 +1,26 @@
+2018-03-30 14:15:27 - Starting TagControllerTest on PCW1937117L with PID 5556 (started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:15:27 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:15:27 - No active profile set, falling back to default profiles: default
+2018-03-30 14:15:32 - Started TagControllerTest in 5.656 seconds (JVM running for 8.312)
+2018-03-30 14:25:32 - Starting TagSubscriptionApplication on PCW1937117L with PID 10988 (C:\customInfo\development\item-tag-subscription\bin started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:25:32 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:25:32 - No active profile set, falling back to default profiles: default
+2018-03-30 14:25:40 - Started TagSubscriptionApplication in 9.161 seconds (JVM running for 10.33)
+2018-03-30 14:28:09 - Starting TagControllerTest on PCW1937117L with PID 2004 (started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:28:09 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:28:09 - No active profile set, falling back to default profiles: default
+2018-03-30 14:28:13 - Started TagControllerTest in 5.211 seconds (JVM running for 7.326)
+2018-03-30 14:28:37 - Starting TagSubscriptionApplication on PCW1937117L with PID 7576 (C:\customInfo\development\item-tag-subscription\build\libs\item-tagsub-0.0.1.jar started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:28:37 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:28:37 - No active profile set, falling back to default profiles: default
+2018-03-30 14:28:53 - Started TagSubscriptionApplication in 17.59 seconds (JVM running for 20.008)
+2018-03-30 14:40:33 - Starting TagControllerTest on PCW1937117L with PID 9996 (started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:40:33 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:40:33 - No active profile set, falling back to default profiles: default
+2018-03-30 14:40:39 - Started TagControllerTest in 6.876 seconds (JVM running for 9.289)
+2018-03-30 14:41:10 - Starting TagSubscriptionApplication on PCW1937117L with PID 11336 (C:\customInfo\development\item-tag-subscription\build\libs\item-tagsub-0.0.1.jar started by EBHUN00 in C:\customInfo\development\item-tag-subscription)
+2018-03-30 14:41:10 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 14:41:10 - No active profile set, falling back to default profiles: default
+2018-03-30 14:41:26 - Started TagSubscriptionApplication in 17.198 seconds (JVM running for 19.597)
+2018-03-30 14:42:13 - Creating file
+2018-03-30 14:42:13 - Item tag subscription successfully completed for file , test.xlsx

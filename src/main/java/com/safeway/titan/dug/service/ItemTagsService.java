@@ -46,6 +46,13 @@ public class ItemTagsService {
 	
 	@Setter
 	private String fileArchivePath;
+	
+	@Setter
+	private String warningMsg;
+	@Setter
+	private String sucessfulMsg;
+	@Setter
+	private String errorMsg;
 
 	@Autowired
 	private ExcelContentWriter excelContentWriter;
@@ -53,6 +60,7 @@ public class ItemTagsService {
 	public String readTags() throws Exception {
 
 		File[] inputFiles = FileReaderUtil.finder(filepath);
+		String resultMessage = inputFiles.length > 0 ? sucessfulMsg : warningMsg;
 		for (File file : inputFiles) {
 			String inputFileName = file.getName();
 			PoijiOptions options = PoijiOptionsBuilder.settings(1).build();
@@ -63,12 +71,13 @@ public class ItemTagsService {
 				contentWriter.writeToCSV(itemsWithMapping, inputFileName);
 				// excelContentWriter.genereateValidationCommentsFile(tags);
 			} catch (IOException e) {
+				resultMessage = errorMsg;
 				log.error("Item tag subscription error for file , {}", inputFileName);
 			}
 			FileUtils.moveFile(file, FileUtils.getFile(fileArchivePath+inputFileName));
 			log.error("Item tag subscription successfully completed for file , {}", inputFileName);
 		}
-		return "Item tag subscription process completed successfully";
+		return resultMessage;
 	}
 
 	private void getBarcodeFromSkus(List<ItemTags> tags) {

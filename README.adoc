@@ -33,10 +33,10 @@ Deployment process:
 	
 Testing:
 
-Upload input file to "item-mapping-input" folder
-Run the Url:http://phvgpru7.safeway.com:8080/tags/generate-item-loc-mapping
-Output will be save in "item-mapping-output" folder
-Logs will be saved in "item-sub-logs" folder
+1. Upload input file to "item-mapping-input" folder
+2. Run the Url:http://phvgpru7.safeway.com:8080/tags/generate-item-loc-mapping
+3. Output will be save in "item-mapping-output" folder
+4. Logs will be saved in "item-sub-logs" folder
 
 
 

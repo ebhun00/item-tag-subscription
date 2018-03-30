@@ -18,6 +18,10 @@ public class ItemTags {
     @Setter
     @Getter
     private String sku;
+    
+    @Setter
+    @Getter
+    private String brcd;
 
     @ExcelCell(2)
     @Setter
@@ -32,17 +36,17 @@ public class ItemTags {
     @ExcelCell(4)
     @Setter
     @Getter
-    private String ais;
+    private String aisle;
 
     @ExcelCell(5)
     @Setter
     @Getter
-    private String sec;
+    private String section;
     
     @ExcelCell(6)
     @Setter
     @Getter
-    private String she;
+    private String shelf;
     
     @ExcelCell(7)
     @Setter
@@ -59,17 +63,24 @@ public class ItemTags {
     @Getter
     private String override_flag_1;
 
-
+    @Setter
+    @Getter
+    private String comments;
+    
+    @Setter
+    @Getter
+    private String tagSubLoc;
+    
     @Override
     public String toString() {
-        return "Employee{" +
+        return "ItemTags{" +
                 "ITEM_ID=" + itemId +
                 ", SKU='" + sku + '\'' +
                 ", POS_DESCRIPTION='" + pos_description + '\'' +
                 ", LOCATION=" + location +
-                ", AIS=" + ais +
-                ", SEC='" + sec + '\'' +
-                ", SHE=" + she +
+                ", AIS=" + aisle +
+                ", SEC='" + section + '\'' +
+                ", SHE=" + shelf +
                 ", FORM_QTY_1=" + from_qty_1 +
                 ", OVERRIDE_QTY_1=" + override_qty_1 +
                 ", OVERRIDE_FLAG_1=" + override_flag_1 +

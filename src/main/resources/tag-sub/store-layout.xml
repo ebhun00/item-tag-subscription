@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <class name="com.safeway.titan.dug.domain.Txml">
+      <map-to xml="tXML" />
+      <field name="header" type="com.safeway.titan.dug.domain.Header">
+         <bind-xml name="Header"/>
+      </field>
+      <field name="message" type="com.safeway.titan.dug.domain.Message">
+         <bind-xml name="Message" />
+      </field>
+      
+   </class>
+   <class name="com.safeway.titan.dug.domain.Header">
+      <field name="source" type="java.lang.String">
+         <bind-xml name="Source" node="attribute" />
+      </field>
+      <field name="action_Type" type="java.lang.String">
+         <bind-xml name="Action_Type" node="attribute" />
+      </field>
+      <field name="message_Type" type="java.lang.String">
+         <bind-xml name="Message_Type" node="attribute" />
+      </field>
+      <field name="company_ID" type="java.lang.String">
+         <bind-xml name="Company_ID" node="attribute" />
+      </field>
+   </class>
+   
+   <class name="com.safeway.titan.dug.domain.Message">
+      <field name="storeLayout" type="com.safeway.titan.dug.domain.StoreLayout">
+         <bind-xml name="StoreLayout"  />
+      </field>
+   </class>
+   
+   <class name="com.safeway.titan.dug.domain.StoreLayout">
+      <field name="businessUnit" type="java.lang.String">
+         <bind-xml name="BusinessUnit" node="attribute" />
+      </field>
+      <field name="facilityAliasId" type="java.lang.String">
+         <bind-xml name="FacilityAliasId" node="attribute" />
+      </field>
+      <field name="categoryType" type="java.lang.String">
+         <bind-xml name="CategoryType" node="attribute" />
+      </field>
+      <field  name="storeSection"
+	         type="com.safeway.titan.dug.domain.StoreSection"
+	         collection="arraylist">
+         <bind-xml name="StoreSection" />
+      </field>
+   </class>
+   
+   <class name="com.safeway.titan.dug.domain.StoreSection">
+      <field name="sectionName1" type="java.lang.String">
+         <bind-xml name="SectionName1" node="attribute" />
+      </field>
+      <field name="sectionSequence" type="java.lang.String">
+         <bind-xml name="SectionSequence" node="attribute" />
+      </field>
+      
+      <field  name="categories"
+	         type="com.safeway.titan.dug.domain.Category"
+	         collection="arraylist">
+         <bind-xml name="Category" />
+      </field>
+   </class>
+   
+   <class name="com.safeway.titan.dug.domain.Category">
+      <field name="extCategoryCode" type="java.lang.String">
+         <bind-xml name="ExtCategoryCode" node="attribute" />
+      </field>
+      </class>
+</mapping>

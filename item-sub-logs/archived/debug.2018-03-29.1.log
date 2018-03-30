@@ -1,0 +1,13 @@
+2018-03-29 23:23:31 - Started DugApplication in 9.472 seconds (JVM running for 10.636)
+2018-03-29 23:24:35 - Creating file
+2018-03-29 23:38:22 - Starting DugApplication on PCW1937117L with PID 5884 (C:\customInfo\development\dugtransformer\bin started by EBHUN00 in C:\customInfo\development\dugtransformer)
+2018-03-29 23:38:22 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-29 23:38:22 - No active profile set, falling back to default profiles: default
+2018-03-29 23:38:32 - Started DugApplication in 11.463 seconds (JVM running for 14.371)
+2018-03-29 23:48:11 - Starting TagControllerTest on PCW1937117L with PID 4184 (started by EBHUN00 in C:\customInfo\development\dugtransformer)
+2018-03-29 23:48:11 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-29 23:48:11 - No active profile set, falling back to default profiles: default
+2018-03-29 23:48:16 - Started TagControllerTest in 5.348 seconds (JVM running for 7.308)
+2018-03-29 23:48:18 - Starting DugApplication on PCW1937117L with PID 9776 (C:\customInfo\development\dugtransformer\build\classes\main started by EBHUN00 in C:\customInfo\development\dugtransformer)
+2018-03-29 23:48:18 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-29 23:48:18 - No active profile set, falling back to default profiles: default

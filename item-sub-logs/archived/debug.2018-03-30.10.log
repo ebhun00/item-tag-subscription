@@ -1,0 +1,16 @@
+2018-03-30 00:54:54 - Started DugApplication in 10.875 seconds (JVM running for 12.223)
+2018-03-30 00:55:07 - Creating file
+2018-03-30 00:55:07 - Item tag subscription successfully completed for file , test.xlsx
+2018-03-30 00:55:12 - Creating file
+2018-03-30 00:55:12 - Item tag subscription successfully completed for file , test1.xlsx
+2018-03-30 00:55:13 - Creating file
+2018-03-30 00:55:13 - Item tag subscription successfully completed for file , test2.xlsx
+2018-03-30 00:55:15 - Creating file
+2018-03-30 00:55:15 - Item tag subscription successfully completed for file , test3.xlsx
+2018-03-30 00:58:48 - Starting TagControllerTest on PCW1937117L with PID 8320 (started by EBHUN00 in C:\customInfo\development\dugtransformer)
+2018-03-30 00:58:48 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 00:58:48 - No active profile set, falling back to default profiles: default
+2018-03-30 00:58:53 - Started TagControllerTest in 5.403 seconds (JVM running for 7.525)
+2018-03-30 01:39:00 - Starting TagControllerTest on PCW1937117L with PID 2628 (started by EBHUN00 in C:\customInfo\development\dugtransformer)
+2018-03-30 01:39:00 - Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-03-30 01:39:00 - No active profile set, falling back to default profiles: default

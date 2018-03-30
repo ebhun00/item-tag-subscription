@@ -17,10 +17,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class })
 @ComponentScan
 @EnableWebMvc
-public class DugApplication {
+public class TagSubscriptionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DugApplication.class, args);
+		SpringApplication.run(TagSubscriptionApplication.class, args);
 	}
 
 	@Bean

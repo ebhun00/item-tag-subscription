@@ -1,8 +1,8 @@
-Application code Availability at: https://github.com/ebhun851/tag-subscription.git
+Application code Availability at: https://github.com/ebhun00/item-tag-subscription.git
 
 Workspace setup:
 
-1. git clone https://github.com/ebhun851/tag-subscription.git 
+1. git clone https://github.com/ebhun00/item-tag-subscription.git
 2. cd dugtransformer
 3. run command : gradlew.bat clean eclipse
 

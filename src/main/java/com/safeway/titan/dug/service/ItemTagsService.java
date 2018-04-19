@@ -63,10 +63,11 @@ public class ItemTagsService {
 		String resultMessage = inputFiles.length > 0 ? sucessfulMsg : warningMsg;
 		for (File file : inputFiles) {
 			String inputFileName = file.getName();
+			String storeNumber = inputFileName.substring(0, 4);
 			PoijiOptions options = PoijiOptionsBuilder.settings(1).build();
 			List<ItemTags> tags = Poiji.fromExcel(file, ItemTags.class, options);
 			getBarcodeFromSkus(tags);
-			List<ItemDestMap> itemsWithMapping = itemTagsMapping.createTagWithMods(tags);
+			List<ItemDestMap> itemsWithMapping = itemTagsMapping.createTagWithMods(tags,storeNumber);
 			try {
 				contentWriter.writeToCSV(itemsWithMapping, inputFileName);
 				// excelContentWriter.genereateValidationCommentsFile(tags);

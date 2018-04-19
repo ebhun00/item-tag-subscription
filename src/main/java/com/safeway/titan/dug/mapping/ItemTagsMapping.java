@@ -23,12 +23,14 @@ public class ItemTagsMapping {
 	@Autowired
 	private DspLocn dspLocn;
 
-	public List<ItemDestMap> createTagWithMods(List<ItemTags> tags) {
+	public List<ItemDestMap> createTagWithMods(List<ItemTags> tags, String storeNumber) {
+		log.info("Preparing tags for store" + storeNumber);
+		
 		List<ItemDestMap> itemsWithRemap = new ArrayList<ItemDestMap>();
 		for (ItemTags itemTags : tags) {
 			if (!dspLocn.getAisleName(itemTags.getAisle()).contains("Invalid")
 					&& !dspLocn.getSectionName(itemTags.getSection(),dspLocn.getAisleName(itemTags.getAisle())).contains("Invalid") && itemTags.getBrcd() != null) {
-				itemsWithRemap.add(prepareItemDestmap(itemTags));
+				itemsWithRemap.add(prepareItemDestmap(itemTags,storeNumber));
 			} else {
 				itemTags.setComments(itemTags.getBrcd() == null ? "Invalid Sku" : "");
 				itemTags.setComments(dspLocn.getCommentForInvalidItem( itemTags));
@@ -61,10 +63,10 @@ public class ItemTagsMapping {
 
 
 
-	private ItemDestMap prepareItemDestmap(ItemTags itemTags) {
+	private ItemDestMap prepareItemDestmap(ItemTags itemTags, String storeNumber) {
 		ItemDestMap destMap = new ItemDestMap();
 		destMap.setSkuBrcd(itemTags.getBrcd());
-		destMap.setStoreName("1211");
+		destMap.setStoreName(storeNumber);
 		destMap.setDspLocn(dspLocn.getAisleName(itemTags.getAisle()) + dspLocn.getSectionName(itemTags.getSection(),dspLocn.getAisleName(itemTags.getAisle()))
 				+ String.format("%03d", Integer.valueOf(itemTags.getShelf())));
 		itemTags.setTagSubLoc(destMap.getDspLocn());

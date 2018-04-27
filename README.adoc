@@ -35,9 +35,13 @@ Deployment process:
 	
 Testing:
 
-1. Upload input file to "item-mapping-input" folder
+1. Upload input file to "item-mapping-input" folder from local
+upload command : 
+scp -r 1953tagsub.xlsx ii00wl@phvgpru7:/apps/scope/custom-apps/tag-subscription/item-mapping-input
 2. Run the Url:http://phvgpru7.safeway.com:8080/tags/generate-item-loc-mapping
 3. Output will be save in "item-mapping-output" folder
+download CSV command:
+scp -r  ii00wl@phvgpru7:/apps/scope/custom-apps/tag-subscription/item-mapping-output/1953tagsub.xlsx-output.csv .
 4. Logs will be saved in "item-sub-logs" folder
 
 

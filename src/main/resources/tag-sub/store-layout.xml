@@ -41,10 +41,10 @@
       <field name="categoryType" type="java.lang.String">
          <bind-xml name="CategoryType" node="attribute" />
       </field>
-      <field  name="storeSection"
-	         type="com.safeway.titan.dug.domain.StoreSection"
-	         collection="arraylist">
-         <bind-xml name="StoreSection" />
+      <field  name="storeSections"
+            type="com.safeway.titan.dug.domain.StoreSection"
+            collection="arraylist">
+         <bind-xml name="storeSections" node="element" />
       </field>
    </class>
    
@@ -57,8 +57,8 @@
       </field>
       
       <field  name="categories"
-	         type="com.safeway.titan.dug.domain.Category"
-	         collection="arraylist">
+            type="com.safeway.titan.dug.domain.Category"
+            collection="arraylist">
          <bind-xml name="Category" />
       </field>
    </class>

@@ -28,7 +28,7 @@ public class CSVContentWriter {
 		
 	public void writeToCSV(List<ItemDestMap> itemsWithMapping, String inputFileName) throws IOException {
 
-		CSVWriter csvWriter = new CSVWriter(new FileWriter(outputFilePath + inputFileName + "-output.csv"),',',CSVWriter.NO_QUOTE_CHARACTER,CSVWriter.NO_QUOTE_CHARACTER,System.getProperty("line.separator"));
+		CSVWriter csvWriter = new CSVWriter(new FileWriter(outputFilePath + inputFileName + ".csv"),',',CSVWriter.NO_QUOTE_CHARACTER,CSVWriter.NO_QUOTE_CHARACTER,System.getProperty("line.separator"));
 		log.info("Creating file");
 		List<String[]> csvContent = ConvertToCSVSupportFormat(itemsWithMapping);
 		String[] header = { "WHSE", "DSP_LOCN", "LOCN_PICK_SEQ", "SKU_BRCD" };

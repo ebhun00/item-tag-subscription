@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface SkuRepository {
 
-	public Map<String,String> getbarcode(List<String> skus) throws SQLException;
+	public Map<String,String> getbarcode(List<String> skus, String storeNumber) throws SQLException;
 }

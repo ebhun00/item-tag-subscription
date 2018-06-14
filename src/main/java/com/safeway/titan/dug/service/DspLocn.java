@@ -27,10 +27,14 @@ public class DspLocn {
 		defaultComments = env.getProperty("tag_sub.aisle.default");
 		Integer inputAisle = Ints.tryParse(input);
 		if (inputAisle != null) {
-			if (Range.open(NumberUtils.INTEGER_ZERO, 99).contains(inputAisle))
+			if (Range.open(NumberUtils.INTEGER_ZERO, 50).contains(inputAisle))
 				return String.format("%02d", inputAisle);
 
-			if (Range.open(199, 250).contains(inputAisle))
+			if (Range.open(50, 100).contains(inputAisle))
+     		   return String.format("%02d", inputAisle);
+			if (inputAisle == 050)
+ 		       return env.getProperty("tag_sub.aisle.a050");
+			if (Range.open(200, 250).contains(inputAisle))
 				return env.getProperty("tag_sub.aisle.a200_249");
 
 			if (inputAisle == 300)
@@ -47,6 +51,8 @@ public class DspLocn {
 				return env.getProperty("tag_sub.aisle.a500_549");
 			if (Range.open(600, 700).contains(inputAisle))
 				return env.getProperty("tag_sub.aisle.a601_699");
+			if (inputAisle == 700)
+ 		       return env.getProperty("tag_sub.aisle.a700");
 			if (inputAisle == 800)
 				return env.getProperty("tag_sub.aisle.a800");
 			/*
@@ -60,6 +66,7 @@ public class DspLocn {
 		defaultComments = env.getProperty("tag_sub.section.default");
 		Integer inputSection = Ints.tryParse(input);
 		String requiredSectionValue = StringUtils.substring(input, input.length() - 2);
+		// Deli or Produce
 		if (inputSection != null && (aisle.equals(env.getProperty("tag_sub.aisle.a450"))
 				|| aisle.equals(env.getProperty("tag_sub.aisle.a300")))) {
 
@@ -78,10 +85,11 @@ public class DspLocn {
 			if (Range.open(399, 500).contains(inputSection))
 				return env.getProperty("tag_sub.section.s400_499") + requiredSectionValue;
 		}
-
+		// Check stand
 		if (inputSection != null && aisle.equals(env.getProperty("tag_sub.aisle.a601_699"))) {
 			return env.getProperty("tag_sub.section.CH") + requiredSectionValue;
 		}
+		// All Others
 		if (inputSection != null) {
 			if (Range.open(99, 200).contains(inputSection))
 				return env.getProperty("tag_sub.section.s100_199") + requiredSectionValue;

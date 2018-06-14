@@ -17,6 +17,6 @@ public class StoreLayout {
 	private String facilityAliasId;
 	private String categoryType;
 	
-	private List<StoreSection> storeSection;
+	private List<StoreSection> storeSections;
 
 }

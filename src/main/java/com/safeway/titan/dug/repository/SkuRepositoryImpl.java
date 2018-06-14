@@ -24,7 +24,7 @@ public class SkuRepositoryImpl implements SkuRepository {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Override
-	public Map<String, String> getbarcode(List<String> skus) throws SQLException {
+	public Map<String, String> getbarcode(List<String> skus,String storeNumber) throws SQLException {
 		Map<String, String> barcodesMap = new HashMap<String, String>();
 
 		String query = "SELECT BRCD.SUPPLIER_ITEM_BARCODE, BRCD.ITEM_BARCODE, IFMW.ITEM_ID FROM"
@@ -35,14 +35,14 @@ public class SkuRepositoryImpl implements SkuRepository {
 
 		int current = 0;
 		int iterInc = 1000;
-
+		log.debug("Query : " + query);
 		while (current < skus.size()) {
 			Map<String, List<String>> barcodes = Collections.singletonMap("skus",
 					skus.subList(current, (current + iterInc > skus.size()) ? skus.size() : current + iterInc));
 			MapSqlParameterSource parameters = new MapSqlParameterSource();
 			parameters.addValue("skus", barcodes.get("skus"));
-			parameters.addValue("facility_name", "1211");
-
+			
+			parameters.addValue("facility_name", storeNumber);
 			List<SkuBrcd> skuBrcds = (List<SkuBrcd>) namedParameterJdbcTemplate.query(query, parameters,
 					new RowMapper<SkuBrcd>() {
 						@Override

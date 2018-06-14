@@ -10,3 +10,6 @@ bin/
 build/
 /.metadata/
 ./item-sub-logs/
+item-sub-logs/
+item-mapping-input/
+item-mapping-output/

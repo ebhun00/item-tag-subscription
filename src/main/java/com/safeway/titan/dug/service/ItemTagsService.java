@@ -26,6 +26,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 @Service
 @Slf4j
@@ -66,11 +67,15 @@ public class ItemTagsService {
 			String storeNumber = inputFileName.substring(0, 4);
 			PoijiOptions options = PoijiOptionsBuilder.settings(1).build();
 			List<ItemTags> tags = Poiji.fromExcel(file, ItemTags.class, options);
-			getBarcodeFromSkus(tags);
+			//getBarcodeFromSkus(tags);
+			addTheLeadingZero(tags);
+			getBarcodeFromSkus(tags,storeNumber);
 			List<ItemDestMap> itemsWithMapping = itemTagsMapping.createTagWithMods(tags,storeNumber);
 			try {
-				contentWriter.writeToCSV(itemsWithMapping, inputFileName);
+				//contentWriter.writeToCSV(itemsWithMapping, inputFileName);
 				// excelContentWriter.genereateValidationCommentsFile(tags);
+				contentWriter.writeToCSV(itemsWithMapping, storeNumber);
+				excelContentWriter.genereateValidationCommentsFile(tags);
 			} catch (IOException e) {
 				resultMessage = errorMsg;
 				log.error("Item tag subscription error for file , {}", inputFileName);
@@ -81,11 +86,22 @@ public class ItemTagsService {
 		return resultMessage;
 	}
 
-	private void getBarcodeFromSkus(List<ItemTags> tags) {
+
+	 private void addTheLeadingZero(List<ItemTags> tags) {
+	         tags.forEach(tag -> {
+	                 String sku =  StringUtils.leftPad(tag.getSku(), 8, '0');
+	                 tag.setSku(sku);
+	         });
+	 }
+
+	private void getBarcodeFromSkus(List<ItemTags> tags, String storeNumber) {
 		List<String> skus = new ArrayList<String>();
-		tags.forEach(tag -> skus.add(String.valueOf(tag.getSku())));
+		tags.forEach(tag -> {
+        String sku =  StringUtils.leftPad(tag.getSku(), 8, '0');
+        skus.add(sku);
+		});
 		try {
-			Map<String, String> barcodesMap = skuRepositoryImpl.getbarcode(skus);
+			Map<String, String> barcodesMap = skuRepositoryImpl.getbarcode(skus,storeNumber);
 			tags.forEach(tag -> tag.setBrcd(barcodesMap.get(tag.getSku())));
 		} catch (SQLException e) {
 			e.printStackTrace();

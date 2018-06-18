@@ -15,9 +15,12 @@ import org.springframework.stereotype.Repository;
 
 import com.safeway.titan.dug.domain.SkuBrcd;
 
+import lombok.extern.slf4j.Slf4j;
+
 //https://stackoverflow.com/questions/4504592/how-to-use-select-in-clause-in-jdbctemplates
 // https://www.logicbig.com/tutorials/spring-framework/spring-data-access-with-jdbc/sql-in-clause.html
 @Repository
+@Slf4j
 public class SkuRepositoryImpl implements SkuRepository {
 
 	@Autowired

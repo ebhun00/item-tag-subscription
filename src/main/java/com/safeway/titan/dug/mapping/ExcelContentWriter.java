@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
 import com.safeway.titan.dug.domain.ItemTags;
+import com.safeway.titan.dug.domain.TagItem;
 
 @Component
 public class ExcelContentWriter {
@@ -20,7 +21,7 @@ public class ExcelContentWriter {
 				"AIS",	"SEC",	"SHE",	/*"FORM_QTY_1",	"OVERRIDE_QTY_1",
 				"OVERRIDE_FLAG_1",*/ "BARCODE", "COMMENTS", "DSP_LOCATION" };
 	
-	public void genereateValidationCommentsFile(List<ItemTags> tags) throws IOException, InvalidFormatException {
+	public void genereateValidationCommentsFile(List<TagItem> tags) throws IOException, InvalidFormatException {
 		Workbook workbook = new XSSFWorkbook(); 
 
 		Sheet sheet = workbook.createSheet("Item_map_validation");
@@ -51,18 +52,18 @@ public class ExcelContentWriter {
         }
 	}
 
-	private void AddRowsToSheet(List<ItemTags> tags, Sheet sheet) {
+	private void AddRowsToSheet(List<TagItem> tags, Sheet sheet) {
 		int rowNum = 1;
-        for(ItemTags item: tags) {
+        for(TagItem item: tags) {
         	Row row = sheet.createRow(rowNum++);
         	int column = 0;
-        	row.createCell(column++).setCellValue(item.getItemId());
+        	row.createCell(column++).setCellValue(item.getUpc());
         	row.createCell(column++).setCellValue(item.getSku());
-        	row.createCell(column++).setCellValue(item.getPos_description());
+        	row.createCell(column++).setCellValue(item.getDescription());
         	row.createCell(column++).setCellValue(item.getLocation());
         	row.createCell(column++).setCellValue(item.getAisle());
         	row.createCell(column++).setCellValue(item.getSection());
-        	row.createCell(column++).setCellValue(item.getShelf());
+        	row.createCell(column++).setCellValue(item.getSide());
         	row.createCell(column++).setCellValue(item.getBrcd());
         	row.createCell(column++).setCellValue(item.getComments());
         	row.createCell(column++).setCellValue(item.getTagSubLoc());

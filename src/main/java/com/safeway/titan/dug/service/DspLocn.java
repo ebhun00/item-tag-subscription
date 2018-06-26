@@ -1,5 +1,7 @@
 package com.safeway.titan.dug.service;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.Range;
 import com.google.common.primitives.Ints;
 import com.safeway.titan.dug.domain.ItemTags;
+import com.safeway.titan.dug.domain.TagItem;
 
 import lombok.Getter;
 
@@ -101,7 +104,7 @@ public class DspLocn {
 		return defaultComments;
 	}
 
-	public String getCommentForInvalidItem(ItemTags itemTags) {
+	public String getCommentForInvalidItem(TagItem itemTags) {
 
 		StringBuilder comments = new StringBuilder(itemTags.getComments());
 

@@ -25,7 +25,7 @@ dependencies {
 	compile 'com.github.ozlerhakan:poiji:1.8'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: '1.5.1.RELEASE'
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
-	compile group: 'com.opencsv', name: 'opencsv', version: '3.9'
+	compile group: 'com.opencsv', name: 'opencsv', version: '3.10'
 	compile group: 'com.google.guava', name: 'guava', version: '23.0'
 	compile group: 'com.github.noraui', name: 'ojdbc7', version: '12.1.0.2'
 	compile group: 'org.apache.poi', name: 'poi', version: '3.17'

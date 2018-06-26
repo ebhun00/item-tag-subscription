@@ -24,7 +24,7 @@
 
 	</appender>
 
-	<logger name="com.safeway" level="debug"
+	<logger name="com.safeway" level="info"
 		additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
 	</logger>

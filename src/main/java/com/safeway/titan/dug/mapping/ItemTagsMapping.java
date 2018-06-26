@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.safeway.titan.dug.domain.ItemDestMap;
 import com.safeway.titan.dug.domain.ItemTags;
+import com.safeway.titan.dug.domain.TagItem;
 import com.safeway.titan.dug.service.DspLocn;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +24,11 @@ public class ItemTagsMapping {
 	@Autowired
 	private DspLocn dspLocn;
 
-	public List<ItemDestMap> createTagWithMods(List<ItemTags> tags, String storeNumber) {
-		log.info("Preparing tags for store" + storeNumber);
+	public List<ItemDestMap> createTagWithMods(List<TagItem>  tags, String storeNumber) {
+		log.info("Preparing tags for store : {}" , storeNumber);
 		
 		List<ItemDestMap> itemsWithRemap = new ArrayList<ItemDestMap>();
-		for (ItemTags itemTags : tags) {
+		for (TagItem itemTags : tags) {
 			if (!dspLocn.getAisleName(itemTags.getAisle()).contains("Invalid")
 					&& !dspLocn.getSectionName(itemTags.getSection(),dspLocn.getAisleName(itemTags.getAisle())).contains("Invalid") && itemTags.getBrcd() != null) {
 				itemsWithRemap.add(prepareItemDestmap(itemTags,storeNumber));
@@ -44,14 +45,14 @@ public class ItemTagsMapping {
 	}
 
 
-	public void filterDuplicates(List<ItemDestMap> itemsWithRemap, List<ItemTags> tags) {
+	public void filterDuplicates(List<ItemDestMap> itemsWithRemap, List<TagItem> tags) {
 		Map<String, List<ItemDestMap>> subLists =  itemsWithRemap.stream().collect(Collectors.groupingBy(ItemDestMap::getSkuBrcd));
 
 		subLists.forEach( (k,v) -> {
 			if(v.size() >1) {
-				List<ItemTags> orginalSublistTags =  tags.stream().filter(tag -> k.equals(tag.getBrcd())).collect(Collectors.toCollection(() -> new ArrayList<ItemTags>()));
-				orginalSublistTags.sort(Comparator.comparing(ItemTags::getAisle).thenComparing(ItemTags::getSection));
-				v.removeIf( (ItemDestMap itemDestmap ) -> itemDestmap.getDspLocn().equals(orginalSublistTags.get(0).getTagSubLoc()));
+				List<TagItem> orginalSublistTags =  tags.stream().filter(tag -> k.equals(tag.getBrcd())).collect(Collectors.toCollection(() -> new ArrayList<TagItem>()));
+				orginalSublistTags.sort(Comparator.comparing(TagItem::getAisle).thenComparing(TagItem::getSection));
+				//v.removeIf( (ItemDestMap itemDestmap ) -> itemDestmap.getDspLocn().equals(orginalSublistTags.get(0).getTagSubLoc()));
 				
 				v.forEach(item -> {
 					itemsWithRemap.removeIf( (ItemDestMap itemDestmap ) -> itemDestmap.getDspLocn().equals(item.getDspLocn()));
@@ -63,12 +64,12 @@ public class ItemTagsMapping {
 
 
 
-	private ItemDestMap prepareItemDestmap(ItemTags itemTags, String storeNumber) {
+	private ItemDestMap prepareItemDestmap(TagItem itemTags, String storeNumber) {
 		ItemDestMap destMap = new ItemDestMap();
 		destMap.setSkuBrcd(itemTags.getBrcd());
 		destMap.setStoreName(storeNumber);
 		destMap.setDspLocn(dspLocn.getAisleName(itemTags.getAisle()) + dspLocn.getSectionName(itemTags.getSection(),dspLocn.getAisleName(itemTags.getAisle()))
-				+ String.format("%03d", Integer.valueOf(itemTags.getShelf())));
+				+ String.format("%03d", Integer.valueOf(itemTags.getSide())));
 		itemTags.setTagSubLoc(destMap.getDspLocn());
 		return destMap;
 	}

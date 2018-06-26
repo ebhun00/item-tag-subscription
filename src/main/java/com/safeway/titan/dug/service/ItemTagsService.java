@@ -1,6 +1,8 @@
 package com.safeway.titan.dug.service;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,14 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
-import com.poiji.bind.Poiji;
-import com.poiji.option.PoijiOptions;
-import com.poiji.option.PoijiOptions.PoijiOptionsBuilder;
 import com.safeway.titan.dug.domain.ItemDestMap;
-import com.safeway.titan.dug.domain.ItemTags;
+import com.safeway.titan.dug.domain.TagItem;
 import com.safeway.titan.dug.mapping.CSVContentWriter;
-import com.safeway.titan.dug.mapping.ExcelContentWriter;
 import com.safeway.titan.dug.mapping.ItemTagsMapping;
+import com.safeway.titan.dug.repository.CategoryRepositoryImpl;
 import com.safeway.titan.dug.repository.SkuRepositoryImpl;
 import com.safeway.titan.dug.util.FileReaderUtil;
 
@@ -26,7 +25,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 @Service
 @Slf4j
@@ -44,10 +42,10 @@ public class ItemTagsService {
 
 	@Setter
 	private String filepath;
-	
+
 	@Setter
 	private String fileArchivePath;
-	
+
 	@Setter
 	private String warningMsg;
 	@Setter
@@ -56,55 +54,88 @@ public class ItemTagsService {
 	private String errorMsg;
 
 	@Autowired
-	private ExcelContentWriter excelContentWriter;
+	private CategoryRepositoryImpl categoryRepositoryImpl;
+
+	@Autowired
+	private EOMItemLocationService eomItemLocationService;
 
 	public String readTags() throws Exception {
 
 		File[] inputFiles = FileReaderUtil.finder(filepath);
-		String resultMessage = inputFiles.length > 0 ? sucessfulMsg : warningMsg;
+		String resultMessage = null;
+		if (inputFiles.length > 0) {
+			resultMessage = sucessfulMsg;
+			categoryRepositoryImpl.getCurrentCategories();
+		} else {
+			resultMessage = warningMsg;
+		}
+		List<String> itemNames = null;
+
 		for (File file : inputFiles) {
 			String inputFileName = file.getName();
-			String storeNumber = inputFileName.substring(0, 4);
-			PoijiOptions options = PoijiOptionsBuilder.settings(1).build();
-			List<ItemTags> tags = Poiji.fromExcel(file, ItemTags.class, options);
-			//getBarcodeFromSkus(tags);
-			addTheLeadingZero(tags);
-			getBarcodeFromSkus(tags,storeNumber);
-			List<ItemDestMap> itemsWithMapping = itemTagsMapping.createTagWithMods(tags,storeNumber);
+			List<TagItem> itemList = mapCsvToObject(file);
+
+			String storeNumber = inputFileName.substring(inputFileName.length() - 8, inputFileName.length() - 4);
+			getBarcodeFromSkus(itemList, storeNumber);
+			List<ItemDestMap> itemsWithMapping = itemTagsMapping.createTagWithMods(itemList, storeNumber);
 			try {
-				//contentWriter.writeToCSV(itemsWithMapping, inputFileName);
 				// excelContentWriter.genereateValidationCommentsFile(tags);
 				contentWriter.writeToCSV(itemsWithMapping, storeNumber);
-				excelContentWriter.genereateValidationCommentsFile(tags);
+				eomItemLocationService.prepareAndSendLocationXmls(itemsWithMapping, storeNumber, itemNames);
+				// excelContentWriter.genereateValidationCommentsFile(itemList);
 			} catch (IOException e) {
 				resultMessage = errorMsg;
 				log.error("Item tag subscription error for file , {}", inputFileName);
 			}
-			FileUtils.moveFile(file, FileUtils.getFile(fileArchivePath+inputFileName));
-			log.error("Item tag subscription successfully completed for file , {}", inputFileName);
+			FileUtils.moveFile(file, FileUtils.getFile(fileArchivePath + inputFileName));
+			log.info("Item tag subscription successfully completed for file , {}", inputFileName);
 		}
+		log.debug(resultMessage);
 		return resultMessage;
 	}
 
-
-	 private void addTheLeadingZero(List<ItemTags> tags) {
-	         tags.forEach(tag -> {
-	                 String sku =  StringUtils.leftPad(tag.getSku(), 8, '0');
-	                 tag.setSku(sku);
-	         });
-	 }
-
-	private void getBarcodeFromSkus(List<ItemTags> tags, String storeNumber) {
+	private void getBarcodeFromSkus(List<TagItem> tags, String storeNumber) {
 		List<String> skus = new ArrayList<String>();
 		tags.forEach(tag -> {
-        String sku =  StringUtils.leftPad(tag.getSku(), 8, '0');
-        skus.add(sku);
+			skus.add(tag.getUpc());
 		});
 		try {
-			Map<String, String> barcodesMap = skuRepositoryImpl.getbarcode(skus,storeNumber);
-			tags.forEach(tag -> tag.setBrcd(barcodesMap.get(tag.getSku())));
+			Map<String, String> barcodesMap = skuRepositoryImpl.getbarcode(skus, storeNumber);
+			tags.forEach(tag -> tag.setBrcd(barcodesMap.get(tag.getUpc())));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<TagItem> mapCsvToObject(File file) {
+		List<TagItem> itemList = new ArrayList<TagItem>();
+		List<String> upcList = new ArrayList<String>();
+		try {
+			BufferedReader fileReader = null;
+			fileReader = new BufferedReader(new FileReader(file.getAbsolutePath()));
+			String record = fileReader.readLine();
+			while ((record = fileReader.readLine()) != null) {
+				String[] fields = record.split(",");
+				if (!upcList.contains(fields[4])) {
+					TagItem tagItem = new TagItem();
+					tagItem.setAisle(fields[0]);
+					tagItem.setSection(fields[1]);
+					tagItem.setSide(fields[2]);
+					tagItem.setSku(fields[3]);
+					tagItem.setUpc(fields[4]);
+					upcList.add(fields[4]);
+					tagItem.setDescription(fields[5]);
+					tagItem.setTag_id(fields[6]);
+					tagItem.setRetailSection(fields[7]);
+					tagItem.setLocation(fields[8]);
+					itemList.add(tagItem);
+				}
+			}
+			fileReader.close();
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+		}
+
+		return itemList;
 	}
 }

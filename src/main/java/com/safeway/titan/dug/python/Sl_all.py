@@ -40,18 +40,27 @@ def make_slayout(filepath):
     message = ET.SubElement(root, "Message")
     storeLayout = ET.SubElement(message, "StoreLayout")
     ET.SubElement(storeLayout, "BusinessUnit").text = '70'
-    ET.SubElement(storeLayout, "FacilityAliasId").text = '1502'
+    ET.SubElement(storeLayout, "FacilityAliasId").text = str(storeNumber)
     ET.SubElement(storeLayout, "CategoryType").text = "L1"
     items = [];
     next(myreader, None) # Skip header
+    prevLocation = "";
+    prevSSection = "";
+    
     for row in myreader:
         items.append(row[3])
-        storeSection = ET.SubElement(storeLayout, "StoreSection")
-        ET.SubElement(storeSection, "SectionName1").text = row[1]
-        ET.SubElement(storeSection, "SectionSequence").text = str(seqCount)
-        category = ET.SubElement(storeSection, "Category")
-        ET.SubElement(category, "ExtCategoryCode").text = row[3]
-        seqCount += 1;
+        if row[1] == prevLocation:
+            category = ET.SubElement(prevSSection, "Category")
+            ET.SubElement(category, "ExtCategoryCode").text = row[3]
+        else:    
+            storeSection = ET.SubElement(storeLayout, "StoreSection")
+            ET.SubElement(storeSection, "SectionName1").text = row[1]
+            prevLocation = row[1];
+            prevSSection = storeSection;
+            ET.SubElement(storeSection, "SectionSequence").text = str(seqCount)
+            category = ET.SubElement(storeSection, "Category")
+            ET.SubElement(category, "ExtCategoryCode").text = row[3]
+            seqCount += 1;
     
     print('items for store : ' + str(storeNumber));
     print((list(set(items) - set(categoryList))));
@@ -59,11 +68,11 @@ def make_slayout(filepath):
     missingCategoryItems = list(set(items) - set(categoryList));
     if len(missingCategoryItems) > 0:
         create_category_xml(missingCategoryItems);
-        
+         
     tree = ET.ElementTree(root)
     tree.write(storeNumber+".xml")
     
-con = cx_Oracle.connect('osflca/osfl2ca@ecom-rac-qa:20001/OSFLQA')
+con = cx_Oracle.connect('osflca/osfl2ca@ecom-rac-prod:20001/OSFLPROD')
 print(con.version)
 
 cursor = con.cursor();
@@ -72,6 +81,7 @@ categoryList =[];
 for row in cursor:
     categoryList.append(row[0]);
 
+print(categoryList) 
 storeNumber = 0;
 directory ="datain/";
 for filename in os.listdir(directory):

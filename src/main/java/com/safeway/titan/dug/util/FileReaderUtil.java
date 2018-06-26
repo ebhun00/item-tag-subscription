@@ -26,7 +26,7 @@ public class FileReaderUtil {
 
 		return dir.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".xlsx");
+				return filename.endsWith(".csv");
 			}
 		});
 

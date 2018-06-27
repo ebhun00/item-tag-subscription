@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safeway.titan.dug.domain.ItemDestMap;
+import com.safeway.titan.dug.repository.CategoryRepositoryImpl;
 
 @Service
 public class EOMItemLocationService {
@@ -24,6 +25,9 @@ public class EOMItemLocationService {
 
 	@Autowired
 	private CategoryDataService categoryDataService;
+	
+	@Autowired
+	private CategoryRepositoryImpl categoryRepositoryImpl;
 
 	public void prepareAndSendLocationXmls(List<ItemDestMap> itemsWithMapping, String storeNumber,
 			List<String> itemNames) {
@@ -37,6 +41,8 @@ public class EOMItemLocationService {
 			categoryDataService.sendXmlToEOM(categoryXml);
 		}
 		storeLayoutService.sendXmlToEOM(storeLayoutXml, storeNumber);
+		
+		categoryRepositoryImpl.saveTempStoreCategories(storeNumber);
 	}
 
 }

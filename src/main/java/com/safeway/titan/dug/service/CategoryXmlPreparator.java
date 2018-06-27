@@ -45,14 +45,12 @@ public class CategoryXmlPreparator {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new FileWriter(env.getProperty("tag-sub.categoryFiles") + storeNum + "-category.xml"));
+			StreamResult result = new StreamResult(new FileWriter(env.getProperty("tag_sub.categoryFiles") + storeNum + "-category.xml"));
 			StringWriter writer = new StringWriter();
 			StreamResult resultXml = new StreamResult(writer);
 			transformer.transform(source, result);
 			transformer.transform(source, resultXml);
 			categoryXml = writer.toString();
-
-			System.out.println("File saved!");
 
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();

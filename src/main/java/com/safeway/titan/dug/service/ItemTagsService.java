@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.safeway.titan.dug.domain.ItemDestMap;
@@ -47,6 +48,9 @@ public class ItemTagsService {
 	private String fileArchivePath;
 
 	@Setter
+	private String categoriesPath;
+
+	@Setter
 	private String warningMsg;
 	@Setter
 	private String sucessfulMsg;
@@ -63,13 +67,14 @@ public class ItemTagsService {
 
 		File[] inputFiles = FileReaderUtil.finder(filepath);
 		String resultMessage = null;
+		List<String> itemNames = null;
 		if (inputFiles.length > 0) {
 			resultMessage = sucessfulMsg;
-			categoryRepositoryImpl.getCurrentCategories();
+			log.info("loading categories");
+			itemNames = FileUtils.readLines(new File(categoriesPath + "categoires.txt"));
 		} else {
 			resultMessage = warningMsg;
 		}
-		List<String> itemNames = null;
 
 		for (File file : inputFiles) {
 			String inputFileName = file.getName();
@@ -137,5 +142,21 @@ public class ItemTagsService {
 		}
 
 		return itemList;
+	}
+
+	@Scheduled(fixedDelay = 86400000)
+	public void getToken() {
+		log.info("pulling the  categories");
+		List<String> itemNames = new ArrayList<String>();
+		itemNames = categoryRepositoryImpl.getCurrentCategories();
+		
+		String[] items = new String[itemNames.size()];
+		itemNames.toArray(items);
+		log.info("all items {}", (Object) items);
+		try {
+			FileUtils.writeLines(new File(categoriesPath + "categoires.txt"), null, itemNames);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

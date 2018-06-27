@@ -46,7 +46,7 @@ public class StoreLayoutXmlPreparator {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new FileWriter(env.getProperty("tag-sub.storeLayoutFiles") + storeNum + "-storeLayout.xml"));
+			StreamResult result = new StreamResult(new FileWriter(env.getProperty("tag_sub.storeLayoutFiles") + storeNum + "-storeLayout.xml"));
 			
 			StringWriter writer = new StringWriter();
 		    StreamResult resultXml = new StreamResult(writer);
